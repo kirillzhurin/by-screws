@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export default (scene) => {
+const createLights = (scene) => {
   // A hemisphere light is a gradient colored light; 
 	// the first parameter is the sky color, the second parameter is the ground color, 
   // the third parameter is the intensity of the light
@@ -33,3 +33,5 @@ export default (scene) => {
 	scene.addLight(hemisphereLight);  
 	scene.addLight(shadowLight);
 }
+
+export default createLights;

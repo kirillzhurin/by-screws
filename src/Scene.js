@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export default class Scene {
+class Scene {
   fieldOfView = 60;
 	nearPlane = 1;
   farPlane = 10000;
@@ -85,4 +85,14 @@ export default class Scene {
   addLight(light) {
     this.scene.add(light);
   }
+
+  addObject(object) {
+    this.scene.add(object.mesh);
+  }
+
+  render() {
+    this.renderer.render(this.scene, this.camera);
+  }
 }
+
+export default Scene;
