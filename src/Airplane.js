@@ -18,6 +18,17 @@ class Airplane {
       color: COLORS.red, 
       shading: THREE.FlatShading
     });
+    // we can access a specific vertex of a shape through
+    // the vertices array, and then move its x, y and z property:
+    geomCockpit.vertices[4].y -= 10;
+    geomCockpit.vertices[4].z += 20;
+    geomCockpit.vertices[5].y -= 10;
+    geomCockpit.vertices[5].z -= 20;
+    geomCockpit.vertices[6].y += 30;
+    geomCockpit.vertices[6].z += 20;
+    geomCockpit.vertices[7].y += 30;
+    geomCockpit.vertices[7].z -= 20;
+
     const cockpit = new THREE.Mesh(geomCockpit, matCockpit);
     cockpit.castShadow = true;
     cockpit.receiveShadow = true;
