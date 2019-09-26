@@ -114,10 +114,10 @@ class Pilot {
   
     // update them according to the angle angleHairs
     const l = hairs.length;
-    for (var i=0; i < l; i++){
+    for (let i = 0; i < l; i++){
       const h = hairs[i];
       // each hair element will scale on cyclical basis between 75% and 100% of its original size
-      h.scale.y = .75 + Math.cos(this.angleHairs + i/3) * .25;
+      h.scale.y = .75 + Math.cos(this.angleHairs + i / 3) * .25;
     }
     // increment the angle for the next frame
     this.angleHairs += 0.16;
