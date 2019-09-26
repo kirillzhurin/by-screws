@@ -57,6 +57,14 @@ class Sky {
   setPositionZ(value) {
     this.mesh.position.z = value
   }
+
+  setRotationZ(value, increase = false) {
+    if (increase) {
+      this.mesh.rotation.z += value;
+    } else {
+      this.mesh.rotation.z = value;
+    }
+  }
 }
 
 export default Sky;
