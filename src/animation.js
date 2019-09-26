@@ -1,0 +1,65 @@
+const animation = (scene, sea, sky, airplane) => {
+  const mousePos={x: 0, y: 0};
+
+  // now handle the mousemove event
+  const handleMouseMove = event => {
+
+    // here we are converting the mouse position value received 
+    // to a normalized value varying between -1 and 1;
+    // this is the formula for the horizontal axis:
+    
+    var tx = (event.clientX / scene.WIDTH) * 2 - 1;
+
+    // for the vertical axis, we need to inverse the formula 
+    // because the 2D y-axis goes the opposite direction of the 3D y-axis
+    
+    var ty = 1 - (event.clientY / scene.HEIGHT) * 2;
+    mousePos.x = tx;
+    mousePos.y = ty;
+
+  }
+
+  document.addEventListener('mousemove', handleMouseMove, false);
+
+
+  const loop = () => {
+    // Rotate the propeller, the sea and the sky
+    sea.setRotationZ(.005, true);
+    sky.setRotationZ(.005, true);
+    updatePlane();
+    
+    scene.render();
+
+    requestAnimationFrame(loop);
+  }
+
+  const updatePlane = () => {
+    // let's move the airplane between -100 and 100 on the horizontal axis, 
+    // and between 25 and 175 on the vertical axis,
+    // depending on the mouse position which ranges between -1 and 1 on both axes;
+    // to achieve that we use a normalize function (see below)
+    
+    var targetX = normalize(mousePos.x, -1, 1, -150, 150);
+    var targetY = normalize(mousePos.y, -1, 1, 25, 175);
+
+    // update the airplane's position
+    airplane.setPositionX(targetX);
+    airplane.setPositionY(targetY);
+    
+    airplane.setPropellerRotationX(.3, true);
+  }
+
+  const normalize = (v, vmin, vmax, tmin, tmax) =>{
+
+    var nv = Math.max(Math.min(v, vmax), vmin);
+    var dv = vmax - vmin;
+    var pc = (nv - vmin) / dv;
+    var dt = tmax - tmin;
+    var tv = tmin + (pc * dt);
+    return tv;
+  }
+
+  loop();
+}
+
+export default animation;

@@ -2,7 +2,9 @@ import './index.scss';
 import Scene from './Scene';
 import Sea from './Sea';
 import Sky from './Sky';
+import Airplane from './Airplane';
 import createLights from './lights';
+import animation from './animation';
 
 window.addEventListener('load', () => {
   const container = document.getElementById('world');
@@ -20,6 +22,10 @@ window.addEventListener('load', () => {
   sky.setPositionY(-600);
   scene.addObject(sky);
 
-  scene.render();
+  const airplane = new Airplane();
+  airplane.setScale(.25, .25, .25);
+  airplane.setPositionY(100);
+  scene.addObject(airplane);
+  animation(scene, sea, sky, airplane);
   
 });
