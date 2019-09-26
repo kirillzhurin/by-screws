@@ -54,7 +54,7 @@ const animation = (scene, sea, sky, airplane) => {
 	  var targetX = normalize(mousePos.x, -.75, .75, -100, 100);
 	
     // Move the plane at each frame by adding a fraction of the remaining distance
-    airplane.mesh.position.y += (targetY - airplane.mesh.position.y) * .1;
+    airplane.setPositionY((targetY - airplane.getPosition('y')) * .1, true);
 
     // Rotate the plane proportionally to the remaining distance
     airplane.setRotationZ((targetY - airplane.getPosition('y')) * .0128);
