@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Pilot from './Pilot';
 import { COLORS } from './config';
 
 class Airplane {
@@ -9,6 +10,7 @@ class Airplane {
     this.createTail();
     this.createWing();
     this.createPropeller();
+    this.addPilot();
   }
 
   createCabin() {
@@ -97,6 +99,15 @@ class Airplane {
     this.propeller.add(blade);
     this.propeller.position.set(50, 0, 0);
     this.mesh.add(this.propeller);
+  }
+
+  addPilot() {
+    this.pilot = new Pilot();
+    this.pilot.mesh.position.set(-10, 27, 0);
+    this.mesh.add(this.pilot.mesh);
+
+    this.mesh.castShadow = true;
+    this.mesh.receiveShadow = true;
   }
 
   setPositionY(value) {
