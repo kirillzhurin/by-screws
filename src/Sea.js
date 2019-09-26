@@ -8,10 +8,10 @@ class Sea {
     // the parameters are: 
     // radius top, radius bottom, height, number of segments on the radius, number of segments vertically
     const geom = new THREE.CylinderGeometry(600, 600, 800, 40, 10);
-	
+  
     // rotate the geometry on the x axis
     geom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-	
+  
     // create the material 
     const mat = new THREE.MeshPhongMaterial({
       color: COLORS.blue,

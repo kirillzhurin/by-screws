@@ -14,14 +14,14 @@ class Airplane {
   createCabin() {
     // BoxGeometry params width, height, depth, widthSegments, heightSegments, depthSegments
     const geomCockpit = new THREE.BoxGeometry(60, 50, 50, 1, 1, 1);
-	  const matCockpit = new THREE.MeshPhongMaterial({
+    const matCockpit = new THREE.MeshPhongMaterial({
       color: COLORS.red, 
       shading: THREE.FlatShading
     });
-	  const cockpit = new THREE.Mesh(geomCockpit, matCockpit);
-	  cockpit.castShadow = true;
-	  cockpit.receiveShadow = true;
-	  this.mesh.add(cockpit);
+    const cockpit = new THREE.Mesh(geomCockpit, matCockpit);
+    cockpit.castShadow = true;
+    cockpit.receiveShadow = true;
+    this.mesh.add(cockpit);
   }
 
   createEngine() {

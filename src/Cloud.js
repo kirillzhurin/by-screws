@@ -7,12 +7,12 @@ class Cloud {
     this.mesh = new THREE.Object3D();
     
     // create a cube geometry;
-	  // this shape will be duplicated to create the cloud
+    // this shape will be duplicated to create the cloud
     const geom = new THREE.BoxGeometry(20, 20, 20);
     
     // create a material; a simple white material will do the trick
-	  const mat = new THREE.MeshPhongMaterial({
-		  color: COLORS.white,  
+    const mat = new THREE.MeshPhongMaterial({
+      color: COLORS.white,  
     });
     
     // duplicate the geometry a random number of times
@@ -34,11 +34,11 @@ class Cloud {
       subMesh.scale.set(size, size, size);
       
       // allow each cube to cast and to receive shadows
-		  subMesh.castShadow = true;
+      subMesh.castShadow = true;
       subMesh.receiveShadow = true;
       
       // add the cube to the container we first created
-		  this.mesh.add(subMesh);
+      this.mesh.add(subMesh);
     }
   }
 }

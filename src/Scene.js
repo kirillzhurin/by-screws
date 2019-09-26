@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 class Scene {
   fieldOfView = 60;
-	nearPlane = 1;
+  nearPlane = 1;
   farPlane = 10000;
     
   constructor(options = {}) {
@@ -14,8 +14,8 @@ class Scene {
     this.createCamera();
     this.createRenderer();
 
-    // Add the DOM element of the renderer to the 
-	  // container created in the HTML
+    // Add the DOM element of the renderer to the
+    // container created in the HTML
     if (options.container) {
       this.container = options.container;
     } else {
@@ -28,8 +28,8 @@ class Scene {
 
   getWindowSize() {
     // Get the width and the height of the screen,
-	  // use them to set up the aspect ratio of the camera 
-	  // and the size of the renderer.
+    // use them to set up the aspect ratio of the camera 
+    // and the size of the renderer.
     this.HEIGHT = window.innerHeight;
     this.WIDTH = window.innerWidth;
     this.aspectRatio = this.WIDTH / this.HEIGHT;
@@ -39,8 +39,8 @@ class Scene {
     // update height and width of the renderer and the camera
     this.getWindowSize();
     this.renderer.setSize(this.WIDTH, this.HEIGHT);
-	  this.camera.aspect = this.aspectRatio;
-	  this.camera.updateProjectionMatrix();
+    this.camera.aspect = this.aspectRatio;
+    this.camera.updateProjectionMatrix();
   }
 
   addFog(color, near, far) {
@@ -54,19 +54,19 @@ class Scene {
   createRenderer() {
     this.renderer = new THREE.WebGLRenderer({
       // Allow transparency to show the gradient background
-		  // we defined in the CSS
+      // we defined in the CSS
       alpha: true,
       // Activate the anti-aliasing; this is less performant,
-		  // for low-poly, it should be fine :)
+      // for low-poly, it should be fine :)
       antialias: true
     });
 
     // Define the size of the renderer; in this case,
-	  // it will fill the entire screen
-	  this.renderer.setSize(this.WIDTH, this.HEIGHT);
-	
-	  // Enable shadow rendering
-	  this.renderer.shadowMap.enabled = true;
+    // it will fill the entire screen
+    this.renderer.setSize(this.WIDTH, this.HEIGHT);
+  
+    // Enable shadow rendering
+    this.renderer.shadowMap.enabled = true;
   }
 
   createCamera() {
@@ -76,10 +76,10 @@ class Scene {
       this.nearPlane,
       this.farPlane
     );
-
+    
     this.camera.position.x = 0;
-	  this.camera.position.z = 200;
-	  this.camera.position.y = 100;
+    this.camera.position.z = 200;
+    this.camera.position.y = 100;
   }
 
   addLight(light) {
