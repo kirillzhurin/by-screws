@@ -107,6 +107,21 @@ class Pilot {
     this.mesh.add(glassL);
     this.mesh.add(glassA);
   }
+
+  updateHairs = function(){
+    // get the hair
+    const hairs = this.hairsTop.children;
+  
+    // update them according to the angle angleHairs
+    const l = hairs.length;
+    for (var i=0; i < l; i++){
+      const h = hairs[i];
+      // each hair element will scale on cyclical basis between 75% and 100% of its original size
+      h.scale.y = .75 + Math.cos(this.angleHairs + i/3) * .25;
+    }
+    // increment the angle for the next frame
+    this.angleHairs += 0.16;
+  }
 }
 
 export default Pilot;

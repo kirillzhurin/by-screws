@@ -21,12 +21,14 @@ const animation = (scene, sea, sky, airplane) => {
 
   document.addEventListener('mousemove', handleMouseMove, false);
 
-
   const loop = () => {
     // Rotate the propeller, the sea and the sky
     sea.setRotationZ(.005, true);
     sky.setRotationZ(.005, true);
     updatePlane();
+    scene.updateCameraFov(normalize(mousePos.x, -1, 1, 40, 80));
+    airplane.pilot.updateHairs();
+    sea.moveWaves();
     
     scene.render();
 
@@ -39,14 +41,26 @@ const animation = (scene, sea, sky, airplane) => {
     // depending on the mouse position which ranges between -1 and 1 on both axes;
     // to achieve that we use a normalize function (see below)
     
-    var targetX = normalize(mousePos.x, -1, 1, -150, 150);
-    var targetY = normalize(mousePos.y, -1, 1, 25, 175);
+    // var targetX = normalize(mousePos.x, -1, 1, -150, 150);
+    // var targetY = normalize(mousePos.y, -1, 1, 25, 175);
 
-    // update the airplane's position
-    airplane.setPositionX(targetX);
-    airplane.setPositionY(targetY);
+    // // update the airplane's position
+    // airplane.setPositionX(targetX);
+    // airplane.setPositionY(targetY);
     
-    airplane.setPropellerRotationX(.3, true);
+    // airplane.setPropellerRotationX(.3, true);
+
+    var targetY = normalize(mousePos.y, -.75, .75, 25, 175);
+	  var targetX = normalize(mousePos.x, -.75, .75, -100, 100);
+	
+    // Move the plane at each frame by adding a fraction of the remaining distance
+    airplane.mesh.position.y += (targetY - airplane.mesh.position.y) * .1;
+
+    // Rotate the plane proportionally to the remaining distance
+    airplane.setRotationZ((targetY - airplane.getPosition('y')) * .0128);
+    airplane.setRotationX((airplane.getPosition('y') - targetY) * .0064);
+
+	  airplane.propeller.rotation.x += .3;
   }
 
   const normalize = (v, vmin, vmax, tmin, tmax) =>{

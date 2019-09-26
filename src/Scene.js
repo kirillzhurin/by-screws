@@ -11,6 +11,7 @@ class Scene {
     // Create the scene
     this.scene = new THREE.Scene()
     this.addFog(0xf7d9aa, 100, 950);
+    this.createLights();
     this.createCamera();
     this.createRenderer();
 
@@ -82,12 +83,50 @@ class Scene {
     this.camera.position.y = 100;
   }
 
-  addLight(light) {
-    this.scene.add(light);
+  createLights() {
+    // A hemisphere light is a gradient colored light; 
+    // the first parameter is the sky color, the second parameter is the ground color, 
+    // the third parameter is the intensity of the light
+    const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, .9)
+
+    const ambientLight = new THREE.AmbientLight(0xdc8874, .5);
+  
+    // A directional light shines from a specific direction. 
+    // It acts like the sun, that means that all the rays produced are parallel. 
+    const shadowLight = new THREE.DirectionalLight(0xffffff, .9);
+    
+    // Set the direction of the light  
+    shadowLight.position.set(150, 350, 350);
+    
+    // Allow shadow casting 
+    shadowLight.castShadow = true;
+  
+    // define the visible area of the projected shadow
+    shadowLight.shadow.camera.left = -400;
+    shadowLight.shadow.camera.right = 400;
+    shadowLight.shadow.camera.top = 400;
+    shadowLight.shadow.camera.bottom = -400;
+    shadowLight.shadow.camera.near = 1;
+    shadowLight.shadow.camera.far = 1000;
+  
+    // define the resolution of the shadow; the higher the better, 
+    // but also the more expensive and less performant
+    shadowLight.shadow.mapSize.width = 2048;
+    shadowLight.shadow.mapSize.height = 2048;
+    
+    // to activate the lights, just add them to the scene
+    this.scene.add(hemisphereLight);  
+    this.scene.add(shadowLight);
+    this.scene.add(ambientLight);
   }
 
   addObject(object) {
     this.scene.add(object.mesh);
+  }
+
+  updateCameraFov(fov) {
+    this.camera.fov = fov;
+    this.camera.updateProjectionMatrix();
   }
 
   render() {
